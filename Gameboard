@@ -11,6 +11,7 @@ func _select_unit(cell: Vector2) -> void:
 
 
 func _on_Cursor_accept_pressed(cell: Vector2) -> void:
+	print(_units)
 	print(_active_unit)
 	print(_active_unit.is_selected)
   
