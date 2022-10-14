@@ -1,0 +1,33 @@
+tool
+class_name Unit
+extends Path2D
+
+## Emitted when the unit reached the end of a path along which it was walking.
+signal walk_finished
+
+## this units unique stats
+export var stats: Resource
+## this units current statuses
+export var status: Resource
+## Shared resource of type Grid, used to calculate map coordinates.
+export var grid: Resource
+## Texture representing the unit.
+export var skin: Texture setget set_skin
+## Offset to apply to the `skin` sprite in pixels.
+export var skin_offset := Vector2.ZERO setget set_skin_offset
+
+## Coordinates of the current cell the cursor moved to.
+var cell := Vector2.ZERO setget set_cell
+## Toggles the "selected" animation on the unit.
+var is_selected := false setget set_is_selected
+
+var _is_walking := false setget _set_is_walking
+
+onready var _sprite: Sprite = $PathFollow2D/Sprite
+onready var _anim_player: AnimationPlayer = $AnimationPlayer
+onready var _path_follow: PathFollow2D = $PathFollow2D
+
+~~~~  skip some functions  ~~~~~~~~
+
+func set_is_selected(value: bool) -> void:
+	is_selected = value
