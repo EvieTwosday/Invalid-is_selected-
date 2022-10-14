@@ -1,0 +1,34 @@
+var _units := {}
+var _active_unit: Unit
+
+
+func _select_unit(cell: Vector2) -> void:
+	if not _units.has(cell):
+		return
+	_active_unit = _units[cell]
+	_active_unit.is_selected = true
+	_walkable_cells = get_walkable_cells(_active_unit)
+
+
+func _on_Cursor_accept_pressed(cell: Vector2) -> void:
+	print(_active_unit)
+	print(_active_unit.is_selected)
+  
+	if not _units.has(cell):
+		$CombatUI.hide_ui()
+		_active_unit.set_is_selected(false)
+#		_deselect_active_unit()
+#		_clear_active_unit()
+	elif _units.has(cell) and targeting == false:
+#		_active_unit = _units[cell]
+#		_deselect_active_unit()
+#		_clear_active_unit()
+		_active_unit = _units[cell]
+		_active_unit.set_is_selected(false)
+		_select_unit(cell)
+	elif _units.has(cell) and targeting == true:
+		_select_target(cell)
+		_target_overlay.draw(_active_targets)
+	elif targeting == true and _active_targets.has(cell):
+		_clear_target(cell)
+		_target_overlay.draw(_active_targets)
